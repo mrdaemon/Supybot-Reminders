@@ -33,6 +33,8 @@ from supybot.commands import *
 import supybot.plugins as plugins
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
+import supybot.schedule as schedule
+
 try:
     from supybot.i18n import PluginInternationalization
     _ = PluginInternationalization('Reminders')
@@ -41,10 +43,26 @@ except ImportError:
     # without the i18n module
     _ = lambda x:x
 
+import sqlite3 as sqlite
+from shlex import shlex
+
 class Reminders(callbacks.Plugin):
     """Add the help for "@plugin help Reminders" here
     This should describe *how* to use this plugin."""
-    pass
+
+    def __init__(self, irc):
+        self.__parent = super(Reminders, self)
+        self.__parent.__init__(irc)
+
+    def remind(self, irc, msg, args, a):
+        """
+        [me|[person]|everyone] <and ...> [in] [time] <[about|of|to] [what]>
+        """
+
+        sender = irc.msg.nick
+        message = "Reminder!"
+
+
 
 
 Class = Reminders
