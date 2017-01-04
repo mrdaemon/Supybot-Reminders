@@ -4,3 +4,4 @@
 *.swp
 *.swo
 Reminders/.ipynb_checkpoints/
+env/
